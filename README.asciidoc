@@ -1,0 +1,25 @@
+= cirrus-init
+
+[.lead]
+A System V init script which executes Bash scripts curled from EC2 instance user data.
+
+Named after http://www.clouds-online.com/cloud_atlas/cirrus/cirrus.htm[thin, high-altitude clouds], `cirrus-init` was hacked together as a simple alternative to Canonical's https://launchpad.net/cloud-init[`cloud-init`] specifically for use with CentOS 6.x AMIs.
+
+If your user data starts with a `#!/bin/bash` shebang, `cirrus-init` will execute it as `root` at boot.
+
+Just do...
+
+[source, shell]
+----
+[root@i-3a133978 ~]# wget https://raw.github.com/leslieianson/cirrus-init/master/cirrus-init -P /etc/init.d/
+[root@i-3a133978 ~]# chmod 0755 /etc/init.d/cirrus-init
+[root@i-3a133978 ~]# chkconfig --add cirrus-init
+[root@i-3a133978 ~]# chkconfig cirrus-init on
+[root@i-3a133978 ~]# chkconfig --list cirrus-init
+[root@i-3a133978 ~]# reboot
+----
+
+...to see it in action before https://github.com/leslieianson/cirrus-init/fork[fork]ing and improving.
+Pull requests are always welcome.
+
+Please refer to http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html[Amazon's EC2 documentation] for more information.
